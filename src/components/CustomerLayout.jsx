@@ -68,7 +68,7 @@ const CustomerLayout = () => {
   return (
     <div className="customer-app-layout">
       <aside className="customer-sidebar">
-        <div className="customer-brand">TRAKJOBS</div>
+        <div className="customer-brand">FIXLYHANDY</div>
 
         <nav className="customer-nav">
           {allowedItems.map((item) => (
@@ -153,7 +153,7 @@ const CustomerLayout = () => {
               </span>
               <span className="customer-profile-text">
                 <span className="customer-profile-name">{customer?.name || 'Customer'}</span>
-                <span className="customer-profile-email">{customer?.email || 'customer@trackjobs.com'}</span>
+                <span className="customer-profile-email">{customer?.email || 'customer@fixlyhandy.com'}</span>
               </span>
             </div>
           </div>

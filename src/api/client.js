@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const DEFAULT_API_BASE_URL = import.meta.env.DEV
   ? 'http://localhost:8000/api/v1'
-  : 'https://api.trakjobs.com/api/v1';
+  : 'https://api.fixlyhandy.com/api/v1';
 
 const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || DEFAULT_API_BASE_URL).replace(/\/+$/, '');
 

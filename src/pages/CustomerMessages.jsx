@@ -47,7 +47,7 @@ const CustomerMessages = () => {
       echoInstanceRef.current = new Echo({
         broadcaster: 'reverb',
         key: 'idgq8iuytafdhi8zrh2u',
-        wsHost: 'api.trakjobs.com',
+        wsHost: 'api.fixlyhandy.com',
         wsPort: 8080,
         forceTLS: false,
         disableStats: true,
