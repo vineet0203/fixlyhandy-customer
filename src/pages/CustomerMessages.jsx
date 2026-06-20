@@ -45,8 +45,8 @@ const CustomerMessages = () => {
     if (!echoInstanceRef.current) {
       window.Pusher = Pusher;
       echoInstanceRef.current = new Echo({
-        broadcaster: 'reverb',
-        key: 'idgq8iuytafdhi8zrh2u',
+        broadcaster: 'pusher',
+        key: 'trakjobs_key',
         wsHost: 'ws.trakjobs.com',
         wsPort: 443,
         forceTLS: true,
