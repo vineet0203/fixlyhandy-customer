@@ -47,9 +47,9 @@ const CustomerMessages = () => {
       echoInstanceRef.current = new Echo({
         broadcaster: 'reverb',
         key: 'idgq8iuytafdhi8zrh2u',
-        wsHost: 'api.trakjobs.com',
-        wsPort: 8080,
-        forceTLS: false,
+        wsHost: 'ws.trakjobs.com',
+        wsPort: 443,
+        forceTLS: true,
         disableStats: true,
         cluster: 'mt1',
         enabledTransports: ['ws', 'wss'],
