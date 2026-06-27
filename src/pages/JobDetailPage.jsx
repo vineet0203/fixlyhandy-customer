@@ -160,6 +160,73 @@ const JobDetailPage = () => {
         </table>
       </div>
 
+      {/* Work Logs / Time Entries Table */}
+      <h3 className="customer-page-title" style={{fontSize:'18px'}}>Work Logs / Time Entries</h3>
+      <div className="customer-table-wrap" style={{marginBottom:'30px'}}>
+        <table className="customer-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Job Name</th>
+              <th>Employee</th>
+              <th>Time In</th>
+              <th>Time Out</th>
+              <th>Duration</th>
+              <th>Approval Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {(job.time_entries?.length > 0) ? job.time_entries.map((entry) => {
+              const checkInDate = entry.check_in ? new Date(entry.check_in) : null;
+              const checkOutDate = entry.check_out ? new Date(entry.check_out) : null;
+              
+              // Helper to format duration
+              const hours = Math.floor((entry.total_time || 0) / 3600);
+              const minutes = Math.floor(((entry.total_time || 0) % 3600) / 60);
+              const durationStr = `${hours}h ${minutes}m`;
+
+              // Status badge style
+              const normStatus = String(entry.status || '').trim().toLowerCase();
+              let badgeBg = '#fef3c7';
+              let badgeColor = '#92400e';
+              let statusText = 'Pending Approval';
+
+              if (normStatus === 'approved') {
+                badgeBg = '#d1fae5';
+                badgeColor = '#065f46';
+                statusText = entry.approved_by_name ? `Approved by ${entry.approved_by_name}` : 'Approved';
+              } else if (normStatus === 'rejected') {
+                badgeBg = '#fee2e2';
+                badgeColor = '#991b1b';
+                statusText = entry.rejected_by_name ? `Rejected by ${entry.rejected_by_name}` : 'Rejected';
+              }
+
+              return (
+                <tr key={entry.id}>
+                  <td>{checkInDate ? checkInDate.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}) : '-'}</td>
+                  <td>{job.title || '-'}</td>
+                  <td>{entry.employee_name || '-'}</td>
+                  <td>{checkInDate ? checkInDate.toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit'}) : '-'}</td>
+                  <td>{checkOutDate ? checkOutDate.toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit'}) : '-'}</td>
+                  <td>{durationStr}</td>
+                  <td>
+                    <span style={{
+                      padding: '4px 8px', borderRadius: '4px', fontSize: '12px', fontWeight: 600,
+                      backgroundColor: badgeBg,
+                      color: badgeColor
+                    }}>
+                      {statusText.toUpperCase()}
+                    </span>
+                  </td>
+                </tr>
+              );
+            }) : (
+              <tr><td colSpan="7" style={{textAlign:'center', color: '#6b7280', padding: '16px'}}>No work logs found.</td></tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+
       {/* Additional Instructions & Notes */}
       {(job.instructions || job.notes) && (
         <div style={{display: 'flex', flexWrap: 'wrap', gap: '20px', marginBottom: '30px'}}>

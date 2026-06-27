@@ -25,15 +25,35 @@ body {
   background: var(--bg);
 }
 
+/* Customer Auth Pages animations & styling */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 .customer-login-page,
 .customer-set-password-page {
   min-height: 100vh;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: radial-gradient(circle at 20% 10%, rgba(53, 116, 187, 0.2), transparent 35%),
     radial-gradient(circle at 80% 90%, rgba(12, 220, 248, 0.2), transparent 35%),
-    #f3f6fb;
+    #f3f6fb !important;
   padding: 24px;
+  color: #202c4b;
+  position: relative;
+  overflow: hidden;
 }
 
 .customer-dashboard-page {
@@ -45,7 +65,20 @@ body {
 }
 
 .customer-login-card,
-.customer-set-password-card,
+.customer-set-password-card {
+  width: 100%;
+  max-width: 450px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 24px;
+  padding: 36px;
+  box-shadow: 0 30px 80px rgba(8, 22, 44, 0.35);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  position: relative;
+  z-index: 10;
+}
+
 .customer-dashboard-card {
   width: 100%;
   max-width: 460px;
@@ -56,7 +89,17 @@ body {
 }
 
 .customer-login-title,
-.customer-set-password-title,
+.customer-set-password-title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #0F2744;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: -0.01em;
+}
+
 .customer-dashboard-title {
   margin: 0 0 10px;
   font-size: 26px;
@@ -71,16 +114,28 @@ body {
   font-size: 14px;
   font-weight: 600;
   padding: 0;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease-out;
 }
 
 .customer-login-back-button:hover {
   color: #2968aa;
+  transform: translateX(-2px);
 }
 
 .customer-login-subtitle,
-.customer-set-password-subtitle,
+.customer-set-password-subtitle {
+  margin: 8px 0 24px;
+  font-size: 14px;
+  color: #5D7389;
+  font-weight: 400;
+  text-align: center;
+}
+
 .customer-dashboard-subtitle {
   margin: 0 0 14px;
   color: var(--muted);
@@ -97,16 +152,18 @@ body {
 .customer-login-form,
 .customer-set-password-form {
   display: grid;
-  gap: 8px;
+  gap: 12px;
 }
 
 .customer-login-label,
 .customer-set-password-label {
   display: block;
-  margin-top: 6px;
-  font-weight: 600;
-  font-size: 14px;
+  margin-top: 4px;
+  font-size: 13px;
   color: #202c4b;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-align: left;
 }
 
 input {
@@ -116,63 +173,92 @@ input {
   border-radius: 10px;
   padding: 0 12px;
   outline: none;
-
   font-size: 14px;
 }
 
-.customer-login-input {
+.customer-login-input,
+.customer-set-password-input {
   width: 100%;
-  padding: 10px 14px;
-  border: 1px solid #dbe3f0;
+  height: 42px;
+  background: #ffffff !important;
+  border: 1px solid #ccd6e4 !important;
   border-radius: 10px;
-  font-size: 14px;
-  color: #202c4b;
-  background: #f8fafd;
-  box-sizing: border-box;
+  padding: 0 14px;
   outline: none;
+  font-size: 14px;
+  color: #202c4b !important;
   font-family: inherit;
+  transition: all 0.15s ease-out;
+  box-sizing: border-box;
+}
+
+.customer-login-input::placeholder,
+.customer-set-password-input::placeholder {
+  color: #94a3b8;
 }
 
 .customer-login-input:focus,
 .customer-set-password-input:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(53, 116, 187, 0.15);
+  border-color: #3574bb !important;
+  background: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(53, 116, 187, 0.15) !important;
 }
 
 .customer-login-input.has-error,
 .customer-set-password-input.has-error {
-  border-color: #b3261e;
+  border-color: #b3261e !important;
 }
 
 .customer-login-alert,
 .customer-set-password-alert {
-  margin-bottom: 14px;
+  margin-bottom: 18px;
   border: 1px solid #f2b8b5;
   background: #fff0ef;
   color: #b3261e;
   border-radius: 10px;
   padding: 10px 12px;
   font-size: 13px;
+  line-height: 1.4;
 }
 
 .customer-set-password-success {
-  margin-bottom: 12px;
-  border: 1px solid #b7e4c7;
-  background: #edfdf3;
+  margin-bottom: 18px;
+  border: 1px solid #9ad7af;
+  background: #ebfff0;
+  color: #0f7a3b;
   border-radius: 10px;
-  padding: 12px;
-  color: #17663a;
-  font-size: 13px;
+  padding: 14px;
+  line-height: 1.4;
 }
 
 .customer-login-error,
 .customer-set-password-error {
   color: #b3261e;
   font-size: 12px;
+  margin-top: -4px;
+  text-align: left;
 }
 
 .customer-login-button,
-.customer-set-password-button,
+.customer-set-password-button {
+  margin-top: 14px;
+  height: 44px;
+  border: 0;
+  border-radius: 10px;
+  background: #3574bb !important;
+  color: #ffffff !important;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease-out;
+  box-shadow: none !important;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
 .customer-dashboard-button {
   margin-top: 10px;
   height: 44px;
@@ -185,15 +271,18 @@ input {
   cursor: pointer;
 }
 
-.customer-login-button:hover,
-.customer-set-password-button:hover,
-.customer-dashboard-button:hover {
-  background: #2968aa;
+.customer-login-button:hover:not(:disabled),
+.customer-set-password-button:hover:not(:disabled) {
+  background: #2968aa !important;
+}
+
+.customer-login-button:active:not(:disabled),
+.customer-set-password-button:active:not(:disabled) {
+  transform: none;
 }
 
 .customer-login-button:disabled,
-.customer-set-password-button:disabled,
-.customer-dashboard-button:disabled {
+.customer-set-password-button:disabled {
   opacity: 0.7;
   cursor: not-allowed;
 }

@@ -51,6 +51,7 @@ const CustomerMessages = () => {
         wsPort: 8080,
         forceTLS: false,
         disableStats: true,
+        cluster: 'mt1',
         enabledTransports: ['ws', 'wss'],
         authEndpoint: `${apiClient.defaults.baseURL}/chat/auth`,
         auth: {

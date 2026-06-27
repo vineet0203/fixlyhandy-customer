@@ -71,7 +71,7 @@ const SetPasswordPage = () => {
 
   return (
     <div className="customer-set-password-page">
-      <div className="customer-set-password-card">
+      <div className="customer-set-password-card animate-fade-in-up">
         <h1 className="customer-set-password-title">Set Password</h1>
         <p className="customer-set-password-subtitle">Create a password for your customer account.</p>
 

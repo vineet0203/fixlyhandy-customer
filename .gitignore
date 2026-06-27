@@ -25,3 +25,9 @@ dist-ssr
 *.sln
 *.sw?
 deploy.sh
+node_modules/
+dist/
+.env
+.env.local
+.env.*.local
+.DS_Store
