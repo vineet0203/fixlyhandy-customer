@@ -78,7 +78,7 @@ const ForgotPassword = () => {
             </div>
             <div style={{ lineHeight: 1, paddingTop: '4px', textAlign: 'left' }}>
               <span style={{ fontSize: '22px', fontWeight: 'bold', letterSpacing: '-0.02em', color: '#0F2744', fontFamily: 'Poppins, sans-serif' }}>
-                Trak<span style={{ color: '#ffb800' }}>Jobs</span>
+                FixlyHandy
               </span>
               <div style={{ marginTop: '2px', fontSize: '10px', fontWeight: 600, color: '#64748b', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
                 Fix it. Right. On time.
