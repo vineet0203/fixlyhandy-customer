@@ -26,54 +26,7 @@ const VerificationPage = () => {
   // References for OTP inputs
   const otpInputsRef = useRef([]);
 
-  // Dynamically load Tailwind CSS CDN and custom styles so they only apply to this page
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://cdn.tailwindcss.com?plugins=forms,container-queries';
-    script.id = 'tailwind-cdn-script';
-    document.head.appendChild(script);
-
-    const style = document.createElement('style');
-    style.id = 'tailwind-custom-style';
-    style.innerHTML = `
-      body {
-        font-family: 'Inter', sans-serif;
-        background-color: #f8fafc;
-      }
-      .bg-brand-navy { background-color: #1a2533; }
-      .text-brand-green { color: #38a169; }
-      .bg-brand-green { background-color: #38a169; }
-      .border-brand-green { border-color: #38a169; }
-      .stepper-line::before {
-        content: '';
-        position: absolute;
-        left: 11px;
-        top: 24px;
-        bottom: -10px;
-        width: 2px;
-        background-color: #374151;
-        z-index: 0;
-      }
-      .stepper-line-last::before {
-        display: none;
-      }
-    `;
-    document.head.appendChild(style);
-
-    // Load Google Fonts Inter
-    const fontLink = document.createElement('link');
-    fontLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap';
-    fontLink.rel = 'stylesheet';
-    fontLink.id = 'inter-font-link';
-    document.head.appendChild(fontLink);
-
-    return () => {
-      // Cleanup elements on unmount
-      document.getElementById('tailwind-cdn-script')?.remove();
-      document.getElementById('tailwind-custom-style')?.remove();
-      document.getElementById('inter-font-link')?.remove();
-    };
-  }, []);
+  // Tailwind already loaded in main.jsx
 
   const handleGoogleVerify = async () => {
     setError('');

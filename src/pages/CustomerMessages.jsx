@@ -45,11 +45,12 @@ const CustomerMessages = () => {
     if (!echoInstanceRef.current) {
       window.Pusher = Pusher;
       echoInstanceRef.current = new Echo({
-        broadcaster: 'reverb',
-        key: 'idgq8iuytafdhi8zrh2u',
-        wsHost: 'api.fixlyhandy.com',
-        wsPort: 8080,
-        forceTLS: false,
+        broadcaster: 'pusher',
+        key: '27639d86be271b0715e4671a577288cb',
+        wsHost: 'ws.fixlyhandy.com',
+        wsPort: 443,
+        wssPort: 443,
+        forceTLS: true,
         disableStats: true,
         cluster: 'mt1',
         enabledTransports: ['ws', 'wss'],

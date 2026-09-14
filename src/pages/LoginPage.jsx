@@ -54,10 +54,7 @@ const LoginPage = () => {
     localStorage.setItem('role', customer?.role || 'customer');
 
     // Redirect to /verify if the account is not verified
-    const redirectTo = !customer?.is_verified
-      ? '/verify'
-      : (location.state?.from?.pathname || '/dashboard');
-    navigate(redirectTo, { replace: true });
+      navigate("/dashboard", { replace: true });
   };
 
   const handleSubmit = async (event) => {
