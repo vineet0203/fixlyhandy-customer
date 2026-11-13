@@ -12,6 +12,9 @@ const LoginPage = () => {
   const [errors, setErrors] = useState({});
   const [apiError, setApiError] = useState('');
   const [loading, setLoading] = useState(false);
+  const homepageUrl = import.meta.env.DEV
+    ? `${window.location.protocol}//${window.location.hostname}:5173`
+    : 'https://fixlyhandy.com';
 
   // WhatsApp Login States
   const [showWhatsappLogin, setShowWhatsappLogin] = useState(false);
@@ -227,15 +230,7 @@ const LoginPage = () => {
         {/* FixlyHandy Logo Branding */}
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
           <a
-            href="/"
-            onClick={(e) => {
-              e.preventDefault();
-              if (window.location.port === '5174' || window.location.port === '5175') {
-                window.location.href = `http://${window.location.hostname}:5173`;
-              } else {
-                window.location.href = '/';
-              }
-            }}
+            href={homepageUrl}
             style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}
           >
             <div style={{ display: 'flex', height: '44px', width: '44px', alignItems: 'center', justifyContent: 'center', borderRadius: '12px', backgroundColor: '#fff3cd', color: '#0F2744' }}>

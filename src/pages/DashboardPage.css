@@ -7,7 +7,7 @@
 .db-avatar { width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg,#667eea,#764ba2); color:#fff; font-weight:700; font-size:16px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
 .db-pname { font-weight:600; font-size:14px; color:#111827; margin:0; }
 .db-prole { font-size:12px; color:#6B7280; margin:0; }
-.db-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-bottom:28px; }
+.db-stats { display:grid; grid-template-columns:repeat(5,1fr); gap:18px; margin-bottom:28px; }
 
 
 

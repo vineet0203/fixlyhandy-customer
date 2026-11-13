@@ -110,6 +110,8 @@ const QuoteDetailPage = () => {
   if (!quote) return <div className="customer-page-card"><p>Quote not found.</p></div>;
 
   const canSign = !['accepted','rejected'].includes(String(quote.approval_status||'').toLowerCase());
+  const quoteDate = quote.quote_due_date || quote.expires_at;
+  const displayedQuoteDate = quoteDate ? String(quoteDate).slice(0, 10) : '-';
 
   return (
     <div className="customer-page-card">
@@ -126,7 +128,7 @@ const QuoteDetailPage = () => {
         <div><label className="customer-login-label">Quote Number</label><input className="customer-login-input" value={quote.quote_number||''} disabled /></div>
         <div><label className="customer-login-label">Title</label><input className="customer-login-input" value={quote.title||''} disabled /></div>
         <div><label className="customer-login-label">Status</label><input className="customer-login-input" value={quote.status||''} disabled /></div>
-        <div><label className="customer-login-label">Due Date</label><input className="customer-login-input" value={quote.quote_due_date||'-'} disabled /></div>
+        <div><label className="customer-login-label">Due / Expiry Date</label><input className="customer-login-input" value={displayedQuoteDate} disabled /></div>
       </div>
 
       <h3 className="customer-page-title" style={{fontSize:'18px',marginTop:'30px'}}>Line Items</h3>

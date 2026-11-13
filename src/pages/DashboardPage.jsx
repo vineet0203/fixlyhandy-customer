@@ -68,11 +68,13 @@ const DashboardPage = () => {
 
   const stats = useMemo(() => {
     const totalQuotes = quotes.length;
-    const approvedQuotes = quotes.filter((q) => norm(q.status) === 'approved').length;
+    const approvedQuotes = quotes.filter((q) => ['accepted', 'approved'].includes(getQuoteStatus(q))).length;
+    const pendingQuotes = quotes.filter((q) => getQuoteStatus(q) === 'pending').length;
     const activeJobs = jobs.filter((j) => norm(j.status) !== 'completed').length;
     const pendingPayments = jobs.filter((j) => norm(j.status) === 'pending payment').length;
     return [
       { label: 'Total Quotes', value: totalQuotes, color: 'blue', icon: <QuoteIcon /> },
+      { label: 'Pending for Approval', value: pendingQuotes, color: 'purple', icon: <ClockIcon /> },
       { label: 'Approved Quotes', value: approvedQuotes, color: 'orange', icon: <CheckIcon /> },
       { label: 'Active Jobs', value: activeJobs, color: 'green', icon: <JobIcon /> },
       { label: 'Pending Payments', value: pendingPayments, color: 'purple', icon: <PayIcon /> },
@@ -142,7 +144,7 @@ const DashboardPage = () => {
                 <td>{q.title || q.subject || '-'}</td>
                 <td>{fmtMoney(q.total_amount || q.total || q.amount)}</td>
                 <td>{fmtDate(q.created_at || q.date)}</td>
-                <td><span className={`db-badge ${qBadge(q.status)}`}>{fmtStatus(q.status)}</span></td>
+                <td><span className={`db-badge ${qBadge(getQuoteStatus(q))}`}>{fmtStatus(getQuoteStatus(q))}</span></td>
                 <td><button className="db-btn" onClick={() => openQuote(q.id)}>View</button></td>
               </tr>
             ))}
@@ -306,6 +308,17 @@ const DashboardPage = () => {
 export default DashboardPage;
 
 const norm = (s) => String(s || '').trim().toLowerCase();
+const getQuoteStatus = (quote) => {
+  const approvalStatus = norm(quote.approval_status);
+  const status = norm(quote.status);
+
+  if (['approved', 'accepted'].includes(approvalStatus) || ['approved', 'accepted'].includes(status)) {
+    return 'approved';
+  }
+  if (approvalStatus === 'rejected' || status === 'rejected') return 'rejected';
+  if (approvalStatus === 'pending' || status === 'pending' || status === 'sent') return 'pending';
+  return status;
+};
 const fmtStatus = (s) => String(s || '').replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()) || '-';
 const fmtMoney = (v) => { if (v == null || v === '') return '-'; const n = parseFloat(v); return isNaN(n) ? String(v) : new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(n); };
 const fmtDate = (v) => { if (!v) return '-'; const d = new Date(v); return isNaN(d.getTime()) ? String(v) : d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }); };
@@ -315,3 +328,4 @@ const QuoteIcon = () => <svg width="26" height="26" viewBox="0 0 24 24" fill="cu
 const CheckIcon = () => <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>;
 const JobIcon = () => <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M20 6h-2.18c.11-.31.18-.65.18-1a3 3 0 00-5.5-1.65l-.5.67-.5-.68A3 3 0 006 5c0 .35.07.69.18 1H4c-1.11 0-2 .89-2 2v11c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2z"/></svg>;
 const PayIcon = () => <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>;
+const ClockIcon = () => <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 11h5v-2h-4V6h-2v6a1 1 0 0 0 1 1z"/></svg>;
